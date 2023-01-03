@@ -1,0 +1,481 @@
+﻿<Window x:Class="Nice_Safe.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Nice_Safe"
+        mc:Ignorable="d"
+        
+        Title="" 
+        Height="450" Width="800"
+        WindowStyle="ToolWindow"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="false"
+        x:Name="Canvas" MouseUp="Canvas_HandleClick"
+        WindowStartupLocation="CenterScreen">
+
+
+    <Border Background="#272537" CornerRadius="0" Visibility="Visible">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height ="75"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!-- Title Name -->
+            <TextBlock HorizontalAlignment = "Center" 
+                       VerticalAlignment = "Center"
+                       Margin="-50,0,0,0" 
+                       Text="[]Nice Safe" 
+                       Foreground="White"
+                       FontSize="20"
+                       FontFamily="OCR A"/>
+
+            <!-- Menu Buttons -->
+            <StackPanel Grid.Row="1">
+                <RadioButton Content="MY PASSWORDS"
+                             Height="50"
+                             Foreground="White"
+                             Style="{StaticResource ButtonStyle}"
+                             IsChecked="True"
+                             x:Name="EntriesButton"
+                             Click="EntriesButton_Click" Cursor="Hand"/>
+
+                <RadioButton Content="NEW ENTRY"
+                             Height="50"
+                             Foreground="White"
+                             Style="{StaticResource ButtonStyle}"
+                             x:Name="NewEntryButton"
+                             Click="NewEntryButton_Click" Cursor="Hand"/>
+
+                <RadioButton Content="DEVELOPER"
+                             Height="50"
+                             Foreground="White"
+                             Style="{StaticResource ButtonStyle}"
+                             x:Name="NoteButton"
+                             Click="NoteButton_Click" Cursor="Hand"/>
+
+                <Label Foreground="White" Margin="12,150,0,0" FontFamily="Consolas">
+                    Beta ver 23.1.0
+                </Label>
+
+            </StackPanel>
+
+            <!-- Edit Button -->
+            <Button Grid.Column="1" Width="21" Height="21"
+                    Margin="-140,0,0,0" Background="#353340" BorderThickness="0" Cursor="Hand"
+                    x:Name="EditButton" Visibility="Hidden" Opacity="1" ToolTip="Edit" Click="EditButton_Click">
+                <Image RenderOptions.BitmapScalingMode="HighQuality"
+                       Source="Image/Edit.png" Margin="1"
+                       x:Name="EditImage"/>
+            </Button>
+
+            <!-- Delete Button -->
+            <Button Grid.Column="1" Width="21" Height="21"
+                    Margin="-87,0,0,0" Background="#353340" BorderThickness="0" Cursor="Hand"
+                    x:Name="DeleteButton" Visibility="Hidden" Opacity="1" ToolTip="Delete"
+                    Click="DeleteButton_Click">
+                <Image RenderOptions.BitmapScalingMode="HighQuality"
+                       Source="Image/Delete.png" Margin="4.5" Opacity="0.3"
+                       x:Name="DeleteImage"/>
+            </Button>
+
+            <!-- Refresh Button -->
+            <Button Grid.Column="1" Width="21" Height="21"
+                    Margin="-35,0,0,0" Background="Transparent" BorderThickness="1" Cursor="Hand"
+                    x:Name="RefreshButton" Visibility="Visible" Opacity="1" ToolTip="Refresh"
+                    Click="RefreshButton_Click">
+                <Image RenderOptions.BitmapScalingMode="HighQuality"
+                       Source="Image/Refresh.png" Margin="1" Opacity="1"
+                       x:Name="RefreshImage"/>
+            </Button>
+
+            <!-- Image Filter -->
+            <Border Grid.Column="1" Width="21" Height="21" Margin="-140,0,0,0"
+                    Background="#353340" Visibility="Visible" 
+                    x:Name="EditButtonFilter" ToolTip="Edit">
+                <Image RenderOptions.BitmapScalingMode="HighQuality"
+                   Source="Image/Edit.png" Opacity="1" Margin="1"/>
+
+            </Border>
+
+            <Border Grid.Column="1" Width="21" Height="21" Margin="-87,0,0,0"
+                    Background="#353340" Visibility="Visible" 
+                    x:Name="DeleteButtonFilter" ToolTip="Delete">
+                <Image RenderOptions.BitmapScalingMode="HighQuality"
+                   Source="Image/Delete.png" Opacity="0.4" Margin="5.5"/>
+
+            </Border>
+
+
+            <!-- Profile, Cloud, Settings - Button -->
+            <Image Grid.Column="1" RenderOptions.BitmapScalingMode="HighQuality" 
+                   Source="Image/Backup.png"
+                   Width="24" Height="24"
+                   Margin="450,0,0,0" MouseLeftButtonDown="CloudImage_MouseLeftButtonDown" Cursor="Hand"
+                   ToolTip="Backup"/>
+
+            <Image Grid.Column="1" RenderOptions.BitmapScalingMode="HighQuality" 
+                   Source="Image/Settings.png"
+                   Width="20" Height="20"
+                   Margin="525,0,0,0" MouseLeftButtonDown="SettingsImage_MouseLeftButtonDown" Cursor="Hand"
+                   ToolTip="Settings"/>
+
+            <Image Grid.Column="1" RenderOptions.BitmapScalingMode="HighQuality" 
+                   Source="Image/Profile.png"
+                   Width="24" Height="24"
+                   Margin="370,0,0,0" MouseLeftButtonDown="ProfileImage_MouseLeftButtonDown" Cursor="Hand"
+                   ToolTip="Administration"/>
+
+
+            <!-- Search Box Section -->
+            <Border CornerRadius="10" Background="#353340" Width="200" Height="40" Margin="-380,0,0,0" Grid.Column="1">
+                <Grid>
+                    <Rectangle StrokeThickness="1"/>
+                    <TextBox Margin="1,0,51,0" Text="{}" BorderThickness="0" Background="Transparent" 
+                             VerticalAlignment="Center" Padding="5" 
+                             Foreground="#CFCFCF" x:Name="SearchBox" 
+                             KeyDown="SearchBox_EnterKeyDown" MouseEnter="SearchBox_HandleMouseEnter"/>
+
+                    <TextBlock IsHitTestVisible="False" Text="Search.." VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Margin="10,0,0,0" FontSize="11" Foreground="DarkGray" Grid.Column="1" 
+                               x:Name="SearchBlock">
+
+                        <!-- Start typing, Hide place holder text -->
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=SearchBox}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </Style>
+                        </TextBlock.Style>
+
+                    </TextBlock>
+
+                    <Image RenderOptions.BitmapScalingMode="HighQuality" 
+                           Source="Image/Search.png"
+                           Width="24" Height="24" Margin="150,0,0,0"/>
+
+                </Grid>
+            </Border>
+
+
+            <!-- List view Section -->
+            <Border Grid.Column="1" Grid.Row="1" 
+                    Margin="5,0,20,20" 
+                    Background="White" 
+                    CornerRadius="10" x:Name="ListViewForm" Visibility="Hidden">
+
+                <ContentControl Margin="20" x:Name="EntriesControl">
+
+                    <ListView x:Name="ListViewRecord" FontFamily="Leelawadee UI" Mouse.MouseUp="ListViewRecord_HandleClick">
+
+                        <ListView.View>
+                            <GridView x:Name="GridViewRow">
+                                <GridViewColumn Width="80"  Header="Tag"      DisplayMemberBinding="{Binding tag}"/>
+                                <GridViewColumn Width="100" Header="Username" DisplayMemberBinding="{Binding username}"/>
+                                <GridViewColumn Width="100" Header="Password" DisplayMemberBinding="{Binding password}"/>
+                                <GridViewColumn Width="205" Header="Email"    DisplayMemberBinding="{Binding email}"/>
+                            </GridView>
+                        </ListView.View>
+
+                    </ListView>
+
+                </ContentControl>
+
+            </Border>
+
+
+            <!-- Search view Section -->
+            <Border Grid.Column="1" Grid.Row="1" 
+                    Margin="5,0,20,20" 
+                    Background="White" 
+                    CornerRadius="10" x:Name="SelectedViewForm">
+
+                <ContentControl Margin="20">
+
+                    <ListView x:Name="SelectedView" FontFamily="Leelawadee UI" Mouse.MouseUp="SelectedView_HandleClick">
+
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="80"  Header="Tag"      DisplayMemberBinding="{Binding tag}"/>
+                                <GridViewColumn Width="100" Header="Username" DisplayMemberBinding="{Binding username}"/>
+                                <GridViewColumn Width="100" Header="Password" DisplayMemberBinding="{Binding password}"/>
+                                <GridViewColumn Width="205" Header="Email"    DisplayMemberBinding="{Binding email}"/>
+                            </GridView>
+                        </ListView.View>
+
+                    </ListView>
+
+
+                </ContentControl>
+
+            </Border>
+
+
+            <!-- New Entry form Section -->
+            <Border Grid.Column="1" Grid.Row="1" 
+                    Margin="5,0,20,20" 
+                    Background="White" 
+                    CornerRadius="10" x:Name="NewEntryForm" Visibility="Hidden">
+
+                <ContentControl Margin="20">
+                    <Grid Height="300" Width="535">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height ="42"/>
+                            <RowDefinition Height="0*"/>
+                            <RowDefinition Height="37*"/>
+                            <RowDefinition Height="37*"/>
+                            <RowDefinition Height="37*"/>
+                            <RowDefinition Height="37*"/>
+                            <RowDefinition Height="37*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Header Text -->
+                        <Label Grid.Row="0" FontStyle="Normal" Margin="20,-10,0,0" FontSize="18" Grid.ColumnSpan="2">
+                            New Entry
+                        </Label>
+                        <Label Grid.Column="0" Grid.Row="2" FontStyle="Normal" Margin="20,5,0,1" FontSize="13">
+                            Tag:
+                        </Label>
+                        <Label Grid.Column="0" Grid.Row="3" FontStyle="Normal" Margin="20,5,0,43" FontSize="13" Grid.RowSpan="2">
+                            Username:
+                        </Label>
+                        <Label Grid.Column="0" Grid.Row="4" FontStyle="Normal" Margin="20,5,0,0" FontSize="13">
+                            Password:
+                        </Label>
+                        <Label Grid.Column="0" Grid.Row="5" FontStyle="Normal" Margin="20,5,0,0" FontSize="13">
+                            Email:
+                        </Label>
+
+                        <!-- Input Text Box -->
+                        <TextBox Grid.Column="1" Grid.Row="2" Margin="7,4,0,20" Width="250" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="13" x:Name="TagBox"/>
+                        <TextBox Grid.Column="1" Grid.Row="3" Margin="7,4,0,20" Width="250" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="13" x:Name="UsernameBox"/>
+                        <TextBox Grid.Column="1" Grid.Row="4" Margin="7,4,0,20" Width="250" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="13" x:Name="PasswordBox"/>
+                        <TextBox Grid.Column="1" Grid.Row="5" Margin="7,4,0,20" Width="250" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="13" x:Name="EmailBox"/>
+
+                        <!-- Submit Button -->
+                        <Button Grid.Column="0" Grid.Row="6" Width="60" HorizontalAlignment="Left" Margin="24,0,0,20" BorderThickness="0" Background="#353340"
+                                x:Name="SubmitButton" Click="SubmitButton_Click">
+                            <TextBlock Text="Submit" Foreground="White" FontSize="13" Margin="0,-5,0,0"/>
+                        </Button>
+
+                    </Grid>
+                </ContentControl>
+
+            </Border>
+
+            <Border Grid.Column="1" Grid.Row="1" 
+                    Margin="5,0,20,20" 
+                    Background="White" 
+                    CornerRadius="10" x:Name="EditForm" 
+                    Visibility="Hidden">
+
+                <ContentControl Margin="20">
+                    <Grid Height="300" Width="535">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height ="42"/>
+                            <RowDefinition Height="0*"/>
+                            <RowDefinition Height="37*"/>
+                            <RowDefinition Height="37*"/>
+                            <RowDefinition Height="37*"/>
+                            <RowDefinition Height="37*"/>
+                            <RowDefinition Height="37*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Header Text -->
+                        <Label Grid.Row="0" FontStyle="Normal" Margin="20,-10,0,0" FontSize="18" Grid.ColumnSpan="2">
+                            Edit Information
+                        </Label>
+                        <Label Grid.Column="0" Grid.Row="2" FontStyle="Normal" Margin="20,5,0,1" FontSize="13">
+                            Tag:
+                        </Label>
+                        <Label Grid.Column="0" Grid.Row="3" FontStyle="Normal" Margin="20,5,0,43" FontSize="13" Grid.RowSpan="2">
+                            Username:
+                        </Label>
+                        <Label Grid.Column="0" Grid.Row="4" FontStyle="Normal" Margin="20,5,0,0" FontSize="13">
+                            Password:
+                        </Label>
+                        <Label Grid.Column="0" Grid.Row="5" FontStyle="Normal" Margin="20,5,0,0" FontSize="13">
+                            Email:
+                        </Label>
+
+                        <!-- Input Text Box -->
+                        <TextBox Grid.Column="1" Grid.Row="2" Margin="7,4,0,20" Width="250" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="13" x:Name="EditTagBox"/>
+                        <TextBox Grid.Column="1" Grid.Row="3" Margin="7,4,0,20" Width="250" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="13" x:Name="EditUsernameBox"/>
+                        <TextBox Grid.Column="1" Grid.Row="4" Margin="7,4,0,20" Width="250" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="13" x:Name="EditPasswordBox"/>
+                        <TextBox Grid.Column="1" Grid.Row="5" Margin="7,4,0,20" Width="250" HorizontalAlignment="Left" VerticalContentAlignment="Center" FontSize="13" x:Name="EditEmailBox"/>
+
+                        <!-- Apply Button -->
+                        <Button Grid.Column="1" Grid.Row="6" Width="60" HorizontalAlignment="Left" Margin="125,2,0,20" BorderThickness="0" Background="#353340"
+                                x:Name="ApplyButton" Click="ApplyButton_Click">
+                            <TextBlock Text="Apply" Foreground="White" FontSize="13" Margin="0,-5,0,0"/>
+                        </Button>
+
+                        <Button Grid.Column="1" Grid.Row="6" Width="60" HorizontalAlignment="Left" Margin="195,2,0,20" BorderThickness="0" Background="#353340"
+                                x:Name="CancelButton" Click="CancelButton_Click">
+                            <TextBlock Text="Cancel" Foreground="White" FontSize="13" Margin="0,-5,0,0"/>
+                        </Button>
+
+                    </Grid>
+                </ContentControl>
+
+            </Border>
+
+
+            <!-- Note form Section -->
+            <Border Grid.Column="1" Grid.Row="1" 
+                    Margin="5,0,20,20" 
+                    Background="White" 
+                    CornerRadius="10" x:Name="NoteForm" Visibility="Visible">
+
+                <Grid Margin="20">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="260"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="0" Margin="0,0,3,0" BorderThickness="0.3" BorderBrush="Black">
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="58*"/>
+                                <RowDefinition Height="69*"/>
+                                <RowDefinition Height="12*"/>
+                                <RowDefinition Height="62*"/>
+                                <RowDefinition Height="97*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="Developer's Message" HorizontalContentAlignment="Center" Margin="0,0,1,0"/>
+
+                            <RichTextBox Grid.Row="1" BorderThickness="0" Margin="0,1,1,0">
+                                <FlowDocument TextAlignment="Justify">
+                                    <Paragraph>
+                                        <Run Text="This is a prototype version, there may be errors and security issues. It should be used carefully."/>
+                                    </Paragraph>
+                                </FlowDocument>
+                            </RichTextBox>
+
+                            <RichTextBox Grid.Row="3" BorderThickness="0" Margin="0,4,1,1">
+                                <FlowDocument TextAlignment="Justify">
+                                    <Paragraph>
+                                        <Run Text="The program has no connection to the database, all data is stored locally on your machine."/>
+                                    </Paragraph>
+                                </FlowDocument>
+                            </RichTextBox>
+
+                            <Border Grid.Row="4" Margin="0,0,0,0" Grid.RowSpan="2">
+                                <Grid Margin="0,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="70*"/>
+                                        <RowDefinition Height="25"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Row="0" Content="Developer"
+                                           Margin="0,39,0,1"/>
+                                    
+                                    <Label Grid.Row="1" Content="Phanuwat Chalee"
+                                           Margin="0,0,0,0" FontStyle="Italic"/>
+
+
+                                </Grid>
+
+                            </Border>
+
+
+                        </Grid>
+
+                    </Border>
+
+                    <Border Grid.Column="1" Margin="3,0,1,0" BorderThickness="0.3" BorderBrush="Black">
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="53*"/>
+                                <RowDefinition Height="50*"/>
+                                <RowDefinition Height="50*"/>
+                                <RowDefinition Height="50*"/>
+                                <RowDefinition Height="50*"/>
+                                <RowDefinition Height="50*"/>
+                                <RowDefinition Height="50*"/>
+                                <RowDefinition Height="50*"/>
+                                <RowDefinition Height="50*"/>
+                                <RowDefinition Height="50*"/>
+                                <RowDefinition Height="50*"/>
+                            </Grid.RowDefinitions>
+
+                            <RichTextBox Grid.Row="0" BorderThickness="0" Margin="1,4,1,27" Grid.RowSpan="2">
+                                <FlowDocument TextAlignment="Center">
+                                    <Paragraph>
+                                        <Run Text="Credits"/>
+                                    </Paragraph>
+                                </FlowDocument>
+                            </RichTextBox>
+
+                            <Label Grid.Row="1" 
+                                   Content="Edit Icon by Bharat Icons" 
+                                   HorizontalContentAlignment="Center"/>
+                            <Label Grid.Row="2" 
+                                   Content="flaticon.com/free-icons/edit-button " 
+                                   HorizontalContentAlignment="Center"/>
+
+                            <Label Grid.Row="3" 
+                                   Content="User Icon by Becris" 
+                                   HorizontalContentAlignment="Center"/>
+                            <Label Grid.Row="4" 
+                                   Content="flaticon.com/free-icons/user" 
+                                   HorizontalContentAlignment="Center"/>
+
+                            <Label Grid.Row="5" 
+                                   Content="Upload Icon by Pixel Perfect" 
+                                   HorizontalContentAlignment="Center"/>
+                            <Label Grid.Row="6" 
+                                   Content="flaticon.com/free-icons/upload" 
+                                   HorizontalContentAlignment="Center"/>
+
+                            <Label Grid.Row="7" 
+                                   Content="Login Icon by Uniconlabs" 
+                                   HorizontalContentAlignment="Center"/>
+                            <Label Grid.Row="8" 
+                                   Content="flaticon.com/free-icons/login" 
+                                   HorizontalContentAlignment="Center"/>
+
+                            <Label Grid.Row="9" 
+                                   Content="Cross, Gear, Update Icons by Freepik" 
+                                   HorizontalContentAlignment="Center"/>
+                            <Label Grid.Row="10" 
+                                   Content="flaticon.com/authors/freepik" 
+                                   HorizontalContentAlignment="Center"/>
+
+                        </Grid>
+
+                    </Border>
+                </Grid>
+
+            </Border>
+
+
+        </Grid>
+
+    </Border>
+</Window>

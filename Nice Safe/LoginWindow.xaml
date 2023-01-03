@@ -1,0 +1,294 @@
+﻿<Window x:Class="Nice_Safe.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Nice_Safe"
+        mc:Ignorable="d"
+        
+        Title="" Height="350" Width="300"
+        WindowStyle="ToolWindow"
+        Background="#272537"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="102"/>
+            <RowDefinition Height="54*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="54*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="52*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="51*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Program Title  -->
+        <Label Grid.Row="0" Content="[]Nice Safe" Margin="0,20,0,0"
+               FontFamily="OCR A" FontSize="20" Foreground="White"
+               HorizontalAlignment="Center" VerticalAlignment="Top" Height="31" Width="142"/>
+
+
+        <!-- Enter username -->
+        <Border CornerRadius="10" Background="#353340" 
+                Margin="50,3,50,3" Grid.Row="1" 
+                x:Name="UsernameBorder"
+                 Visibility="Visible">
+
+            <Grid>
+                <Rectangle StrokeThickness="1"/>
+
+                <!-- User Input -->
+                <TextBox Margin="32,0,0,0" Text="{}" BorderThickness="0" Background="Transparent" 
+                         VerticalAlignment="Center" Padding="5" 
+                         Foreground="#CFCFCF" x:Name="UserBox"
+                         KeyDown="UserBox_KeyDown"/>
+
+                <!-- Place holder text  -->
+                <TextBlock IsHitTestVisible="False" Text="Username" VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Margin="40,0,0,0" FontSize="11" Foreground="DarkGray" Grid.Column="1" 
+                               x:Name="UserBlock">
+
+                    <!-- Start typing, Hide place holder text -->
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=UserBox}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </Style>
+                    </TextBlock.Style>
+
+                </TextBlock>
+
+                <Image RenderOptions.BitmapScalingMode="HighQuality" 
+                           Source="Image/User.png"
+                           Width="24" Height="24" Margin="-150,0,0,0"/>
+
+            </Grid>
+
+        </Border>
+
+        <!-- Enter Password -->
+        <Border CornerRadius="10" Background="#353340" 
+                Margin="50,3,50,3" Grid.Row="3" 
+                x:Name="PasswordBorder"
+                 Visibility="Visible">
+
+            <Grid>
+                <Rectangle StrokeThickness="1"/>
+
+                <!-- User Input -->
+                <PasswordBox Margin="32,0,0,0" BorderThickness="0" Background="Transparent" 
+                             VerticalAlignment="Center" Padding="5" 
+                             Foreground="#CFCFCF" x:Name="PassBox" 
+                             PasswordChanged="PassBox_PasswordChanged"
+                             KeyDown="PassBox_KeyDown"/>
+
+                <!-- Place holder Text -->
+                <TextBlock IsHitTestVisible="False" Text="Password" VerticalAlignment="Center" HorizontalAlignment="Left"
+                           Margin="40,0,0,0" FontSize="11" Foreground="DarkGray" Grid.Column="1" 
+                           x:Name="PassBlock">
+
+                    <!-- Start typing, Hide place holder text -->
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=Password, ElementName=PassBox}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </Style>
+                    </TextBlock.Style>
+
+                </TextBlock>
+
+                <Image RenderOptions.BitmapScalingMode="HighQuality" 
+                           Source="Image/Pass.png"
+                           Width="24" Height="24" Margin="-150,0,0,0"/>
+
+            </Grid>
+
+        </Border>
+
+        <!-- Login Button -->
+        <Border CornerRadius="10" Background="White" Grid.Row="5" 
+                MouseEnter="LoginButtonBorder_HandleHover" 
+                MouseLeave="LoginButtonBorder_HandleStopHover" 
+                Margin="90,5,90,15" 
+                x:Name="LoginButtonBorder"
+                 Visibility="Visible">
+
+            <Grid>
+                <Button Content="LOGIN" Background="White"
+                        Foreground="Black"
+                        x:Name="LoginButton" Click="LoginButton_Click"
+                        Cursor="Hand" Margin="3,0,3,0" BorderThickness="0"/>
+
+            </Grid>
+
+        </Border>
+
+        <!-- Create and Reset Buttons -->
+        <Border CornerRadius="10" Background="Transparent" Grid.Row="7"
+                Margin="0,1,0,0" x:Name="Create_Reset_ButtonBorder"
+                Visibility="Visible">
+
+            <Grid Margin="0,-14,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height ="25"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Create Account" Foreground="DarkCyan" VerticalAlignment="Center" HorizontalAlignment="Center"
+                       FontSize="10" Height="24" Width="78"
+                       x:Name="CreateAccountButton" Cursor="Hand"
+                       MouseEnter="CreateAccountButton_HandleHover" MouseLeave="CreateAccountButton_HandleStopHover"
+                       MouseUp="CreateAccountButton_HandleClick"/>
+
+                <Label Content="Reset Password" Foreground="DarkCyan" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Height="36"
+                       FontSize="10" Width="78" Cursor="Hand"
+                       x:Name="ResetPassButton"
+                       MouseEnter="ResetPassButton_HandleHover" MouseLeave="ResetPassButton_HandleStopHover"
+                       MouseUp="ResetPassButton_HandleClick"/>
+
+            </Grid>
+
+        </Border>
+
+
+
+
+
+        <!-- Create Account Section -->
+
+        <!-- Username Creation -->
+        <Border CornerRadius="10" Background="#353340" 
+                Margin="50,3,50,3" Grid.Row="1" 
+                x:Name="CreateUsernameBorder" Visibility="Hidden">
+
+            <Grid>
+                <Rectangle StrokeThickness="1"/>
+
+                <!-- User Input -->
+                <TextBox Margin="32,0,0,0" Text="{}" BorderThickness="0" Background="Transparent" 
+                             VerticalAlignment="Center" Padding="5" 
+                             Foreground="#CFCFCF" x:Name="NameInputBox"/>
+
+                <!-- Place holder text  -->
+                <TextBlock IsHitTestVisible="False" Text="Username" VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Margin="40,0,0,0" FontSize="11" Foreground="DarkGray" Grid.Column="1" 
+                               x:Name="NameInputBlock">
+
+                    <!-- Start typing, Hide place holder text -->
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=NameInputBox}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </Style>
+                    </TextBlock.Style>
+
+                </TextBlock>
+
+                <Image RenderOptions.BitmapScalingMode="HighQuality" 
+                           Source="Image/User.png"
+                           Width="24" Height="24" Margin="-150,0,0,0"/>
+
+            </Grid>
+
+        </Border>
+
+        <!-- Password Creation -->
+
+        <Border CornerRadius="10" Background="#353340" 
+                Margin="50,3,50,3" Grid.Row="3" 
+                x:Name="CreatePassBorder" Visibility="Hidden">
+
+            <Grid>
+                <Rectangle StrokeThickness="1"/>
+
+                <!-- User Input -->
+                <TextBox Margin="32,0,0,0" BorderThickness="0" Background="Transparent" 
+                             VerticalAlignment="Center" Padding="5" 
+                             Foreground="#CFCFCF" x:Name="PassInputBox"/>
+
+
+                <!-- Place holder Text -->
+                <TextBlock IsHitTestVisible="False" Text="Password" VerticalAlignment="Center" HorizontalAlignment="Left"
+                               Margin="40,0,0,0" FontSize="11" Foreground="DarkGray" Grid.Column="1" 
+                               x:Name="PassInputBlock">
+
+                    <!-- Start typing, Hide place holder text -->
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=PassInputBox}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                            <Setter Property="Visibility" Value="Hidden"/>
+                        </Style>
+                    </TextBlock.Style>
+
+                </TextBlock>
+
+                <Image RenderOptions.BitmapScalingMode="HighQuality" 
+                           Source="Image/Pass.png"
+                           Width="24" Height="24" Margin="-150,0,0,0"/>
+
+            </Grid>
+
+        </Border>
+
+        <!-- Create Button -->
+        <Border CornerRadius="10" Background="White" Grid.Row="5" 
+                MouseEnter="CreateButtonBorder_HandleHover" 
+                MouseLeave="CreateButtonBorder_HandleStopHover" 
+                Margin="90,5,90,15" 
+                x:Name="CreateButtonBorder"
+                Visibility="Hidden">
+
+            <Grid>
+                <Button Content="CREATE" Background="White"
+                        Foreground="Black"
+                        x:Name="CreateButton" Click="CreateButton_Click"
+                        Cursor="Hand" Margin="3,0,3,0" BorderThickness="0"/>
+            </Grid>
+
+        </Border>
+
+        <!-- Already have an account Button -->
+        <Border CornerRadius="10" Background="Transparent" Grid.Row="7"
+                Margin="0,1,0,0" x:Name="HaveAccountButtonBorder"
+                Visibility="Hidden">
+
+            <Grid Margin="0,-14,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height ="25"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label Content="already have an account" 
+                       Foreground="DarkCyan" 
+                       VerticalAlignment="Center" 
+                       HorizontalAlignment="Center"
+                       FontSize="10" Height="24" Width="120"
+                       
+                       x:Name="HaveAccountButton" Cursor="Hand"
+                       MouseEnter="HaveAccountButton_HandleHover" 
+                       MouseLeave="HaveAccountButton_HandleStopHover"
+                       MouseUp="HaveAccountButton_HandleClick"/>
+            </Grid>
+
+        </Border>
+
+    </Grid>
+
+</Window>
