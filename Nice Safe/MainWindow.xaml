@@ -62,7 +62,7 @@
                              Click="NoteButton_Click" Cursor="Hand"/>
 
                 <Label Foreground="White" Margin="12,150,0,0" FontFamily="Consolas">
-                    Beta ver 23.1.0
+                    Beta ver 23.1.1
                 </Label>
 
             </StackPanel>

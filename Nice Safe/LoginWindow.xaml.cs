@@ -13,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using System.Security.Cryptography;
+using System.Windows.Markup;
+
 namespace Nice_Safe
 {
     /// <summary>
@@ -48,7 +51,11 @@ namespace Nice_Safe
             {
                 string[] txt = File.ReadAllLines(subVaultPath + userfileName);
 
-                if (UserBox.Text == txt[0] && PassBox.Password == txt[1])
+                //.. UNCODE
+                string username = Encoding.UTF8.GetString(Convert.FromBase64String(txt[0]));
+                string password = Encoding.UTF8.GetString(Convert.FromBase64String(txt[1]));
+
+                if (UserBox.Text == username && PassBox.Password == password)
                 {
                     this.Hide();
                     mainWindow.Show();
@@ -73,7 +80,11 @@ namespace Nice_Safe
                 {
                     string[] txt = File.ReadAllLines(subVaultPath + userfileName);
 
-                    if (UserBox.Text == txt[0] && PassBox.Password == txt[1])
+                    //.. UNCODE
+                    string username = Encoding.UTF8.GetString(Convert.FromBase64String(txt[0]));
+                    string password = Encoding.UTF8.GetString(Convert.FromBase64String(txt[1]));
+
+                    if (UserBox.Text == username && PassBox.Password == password)
                     {
                         this.Hide();
                         mainWindow.Show();
@@ -98,7 +109,11 @@ namespace Nice_Safe
                 {
                     string[] txt = File.ReadAllLines(subVaultPath + userfileName);
 
-                    if (UserBox.Text == txt[0] && PassBox.Password == txt[1])
+                    //.. UNCODE
+                    string username = Encoding.UTF8.GetString(Convert.FromBase64String(txt[0]));
+                    string password = Encoding.UTF8.GetString(Convert.FromBase64String(txt[1]));
+
+                    if (UserBox.Text == username && PassBox.Password == password)
                     {
                         this.Hide();
                         mainWindow.Show();
@@ -223,9 +238,12 @@ namespace Nice_Safe
                 {
                     foreach (var data in ms)
                     {
-                        w.WriteLine(data);
+                        //.. ENCODE & Save 
+                        w.WriteLine(Convert.ToBase64String(Encoding.UTF8.GetBytes(data)));
                     }
                 }
+
+                string encodedStr = Convert.ToBase64String(Encoding.UTF8.GetBytes("inputStr"));
 
                 MessageBox.Show("     Account successfully created !");
 

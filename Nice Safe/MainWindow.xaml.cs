@@ -16,6 +16,8 @@ using System.Windows;
 using System.Windows.Input;
 using System.IO;
 
+using System.Security.Cryptography;
+
 
 namespace Nice_Safe
 {
@@ -110,10 +112,11 @@ namespace Nice_Safe
             {
                 foreach (var data in ms)
                 {
-                    w.WriteLine(data);
+                    //.. SAVE & ENCODE
+                    w.WriteLine(Convert.ToBase64String(Encoding.UTF8.GetBytes(data)));
                 }
             }
-            
+
             MessageBox.Show(TagBox.Text + " successfully submitted !");
 
             UsernameBox.Text = "";
@@ -121,12 +124,20 @@ namespace Nice_Safe
             EmailBox.Text    = "";
             PasswordBox.Text = "";
 
+
             //.. Add to Entry List
             string[] txt = File.ReadAllLines(pathFormat);
-            nsf.tag      = txt[0];
-            nsf.username = txt[1];
-            nsf.password = txt[2];
-            nsf.email    = txt[3];
+
+            //.. UNCODE
+            string _tag      = Encoding.UTF8.GetString(Convert.FromBase64String(txt[0]));
+            string _username = Encoding.UTF8.GetString(Convert.FromBase64String(txt[1]));
+            string _password = Encoding.UTF8.GetString(Convert.FromBase64String(txt[2]));
+            string _email    = Encoding.UTF8.GetString(Convert.FromBase64String(txt[3]));
+
+            nsf.tag      = _tag;
+            nsf.username = _username;
+            nsf.password = _password;
+            nsf.email    = _email;
             entriesList. Add(nsf);
             ListViewRecord.Items.Add(entriesList.Last());
         }
@@ -398,10 +409,13 @@ namespace Nice_Safe
         {
             //.. Open and get access to all text lines
             string[] txt = File.ReadAllLines((vaultPath + tag_selected));
-            txt[0] = EditTagBox.Text;
-            txt[1] = EditUsernameBox.Text;
-            txt[2] = EditPasswordBox.Text;
-            txt[3] = EditEmailBox.Text;
+
+            //.. Replace old values with new encoded data from text box
+            txt[0] = Convert.ToBase64String(Encoding.UTF8.GetBytes(EditTagBox.Text));
+            txt[1] = Convert.ToBase64String(Encoding.UTF8.GetBytes(EditUsernameBox.Text));
+            txt[2] = Convert.ToBase64String(Encoding.UTF8.GetBytes(EditPasswordBox.Text));
+            txt[3] = Convert.ToBase64String(Encoding.UTF8.GetBytes(EditEmailBox.Text));
+
 
             //.. Save changed back to the file
             File.WriteAllLines((vaultPath + tag_selected), txt);
@@ -430,10 +444,16 @@ namespace Nice_Safe
                 foreach (string fileName in fileEntries)
                 {
                     string[] text = File.ReadAllLines(fileName);
-                    nsf.tag = text[0];
-                    nsf.username = text[1];
-                    nsf.password = text[2];
-                    nsf.email = text[3];
+
+                    string _tag      = Encoding.UTF8.GetString(Convert.FromBase64String(text[0]));
+                    string _username = Encoding.UTF8.GetString(Convert.FromBase64String(text[1]));
+                    string _password = Encoding.UTF8.GetString(Convert.FromBase64String(text[2]));
+                    string _email    = Encoding.UTF8.GetString(Convert.FromBase64String(text[3]));
+
+                    nsf.tag      = _tag;
+                    nsf.username = _username;
+                    nsf.password = _password;
+                    nsf.email    = _email;
                     entriesList.Add(nsf);
                 }
 
