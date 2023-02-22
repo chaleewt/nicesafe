@@ -62,7 +62,7 @@
                              Click="NoteButton_Click" Cursor="Hand"/>
 
                 <Label Foreground="White" Margin="12,150,0,0" FontFamily="Consolas">
-                    Beta ver 23.1.1
+                    Prototype ver 23.1.1
                 </Label>
 
             </StackPanel>
@@ -371,7 +371,7 @@
                             <RichTextBox Grid.Row="1" BorderThickness="0" Margin="0,1,1,0">
                                 <FlowDocument TextAlignment="Justify">
                                     <Paragraph>
-                                        <Run Text="This is a prototype version, there may be errors and security issues. It should be used carefully."/>
+                                        <Run Text="Prototype version with potential errors and security risks. Use with caution."/>
                                     </Paragraph>
                                 </FlowDocument>
                             </RichTextBox>
@@ -379,7 +379,7 @@
                             <RichTextBox Grid.Row="3" BorderThickness="0" Margin="0,4,1,1">
                                 <FlowDocument TextAlignment="Justify">
                                     <Paragraph>
-                                        <Run Text="The program has no connection to the database, all data is stored locally on your machine."/>
+                                        <Run Text="No database connection, all data stored locally on your machine."/>
                                     </Paragraph>
                                 </FlowDocument>
                             </RichTextBox>
@@ -437,35 +437,35 @@
                                    HorizontalContentAlignment="Center"/>
                             <Label Grid.Row="2" 
                                    Content="flaticon.com/free-icons/edit-button " 
-                                   HorizontalContentAlignment="Center"/>
+                                   HorizontalContentAlignment="Center" FontStyle="Oblique" />
 
                             <Label Grid.Row="3" 
                                    Content="User Icon by Becris" 
                                    HorizontalContentAlignment="Center"/>
                             <Label Grid.Row="4" 
                                    Content="flaticon.com/free-icons/user" 
-                                   HorizontalContentAlignment="Center"/>
+                                   HorizontalContentAlignment="Center" FontStyle="Oblique"/>
 
                             <Label Grid.Row="5" 
                                    Content="Upload Icon by Pixel Perfect" 
                                    HorizontalContentAlignment="Center"/>
                             <Label Grid.Row="6" 
                                    Content="flaticon.com/free-icons/upload" 
-                                   HorizontalContentAlignment="Center"/>
+                                   HorizontalContentAlignment="Center" FontStyle="Oblique"/>
 
                             <Label Grid.Row="7" 
                                    Content="Login Icon by Uniconlabs" 
                                    HorizontalContentAlignment="Center"/>
                             <Label Grid.Row="8" 
                                    Content="flaticon.com/free-icons/login" 
-                                   HorizontalContentAlignment="Center"/>
+                                   HorizontalContentAlignment="Center" FontStyle="Oblique"/>
 
                             <Label Grid.Row="9" 
                                    Content="Cross, Gear, Update Icons by Freepik" 
                                    HorizontalContentAlignment="Center"/>
                             <Label Grid.Row="10" 
                                    Content="flaticon.com/authors/freepik" 
-                                   HorizontalContentAlignment="Center"/>
+                                   HorizontalContentAlignment="Center" FontStyle="Oblique"/>
 
                         </Grid>
 
