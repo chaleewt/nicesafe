@@ -62,7 +62,7 @@
                              Click="NoteButton_Click" Cursor="Hand"/>
 
                 <Label Foreground="White" Margin="12,150,0,0" FontFamily="Consolas">
-                    Prototype ver 23.1.1
+                    PROTOTYPE VER 23.1.1
                 </Label>
 
             </StackPanel>
@@ -366,12 +366,17 @@
                                 <RowDefinition Height="97*"/>
                             </Grid.RowDefinitions>
 
-                            <Label Grid.Row="0" Content="Developer's Message" HorizontalContentAlignment="Center" Margin="0,0,1,0"/>
+                            <Label Grid.Row="0" HorizontalContentAlignment="Center" Margin="0,0,1,0">
+                                <Label.Content>
+                                    <TextBlock><Bold>Developer's Message</Bold></TextBlock>
+                                </Label.Content>
+                            </Label>
 
                             <RichTextBox Grid.Row="1" BorderThickness="0" Margin="0,1,1,0">
                                 <FlowDocument TextAlignment="Justify">
                                     <Paragraph>
-                                        <Run Text="Prototype version with potential errors and security risks. Use with caution."/>
+                                        <Run Text="This software is intended for knowledgeable users who understand and accept the potential risks
+Exercise caution and responsibility while using the software."/>
                                     </Paragraph>
                                 </FlowDocument>
                             </RichTextBox>
@@ -379,7 +384,8 @@
                             <RichTextBox Grid.Row="3" BorderThickness="0" Margin="0,4,1,1">
                                 <FlowDocument TextAlignment="Justify">
                                     <Paragraph>
-                                        <Run Text="No database connection, all data stored locally on your machine."/>
+                                        <Run Text="All data is stored locally on the user's device and can be easily backed up by going to 
+                                             'c:/temp/nsf' No online services available!"/>
                                     </Paragraph>
                                 </FlowDocument>
                             </RichTextBox>
@@ -427,7 +433,7 @@
                             <RichTextBox Grid.Row="0" BorderThickness="0" Margin="1,4,1,27" Grid.RowSpan="2">
                                 <FlowDocument TextAlignment="Center">
                                     <Paragraph>
-                                        <Run Text="Credits"/>
+                                        <Bold>Credits</Bold>
                                     </Paragraph>
                                 </FlowDocument>
                             </RichTextBox>
